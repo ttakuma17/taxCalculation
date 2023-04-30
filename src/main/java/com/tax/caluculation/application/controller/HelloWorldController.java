@@ -1,6 +1,8 @@
 package com.tax.caluculation.application.controller;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.tax.caluculation.domain.resource.Message;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +16,8 @@ public class HelloWorldController {
   }
 
   @PostMapping("/check-post")
-  public String helloPost(){
-    return "Hello POST";
+  public ResponseEntity<Message> helloPost(){
+    Message message = new Message("Hello Json");
+    return ResponseEntity.ok().body(message);
   }
-
 }

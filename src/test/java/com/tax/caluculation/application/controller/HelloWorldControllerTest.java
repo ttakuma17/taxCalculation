@@ -26,6 +26,6 @@ class HelloWorldControllerTest {
   public void testHelloPost() throws Exception{
     mockMvc.perform(post("/check-post"))
         .andExpect(status().isOk())
-        .andExpect(content().string("Hello POST"));
+        .andExpect(content().string("{\"message\":\"Hello Json\"}"));
   }
 }
