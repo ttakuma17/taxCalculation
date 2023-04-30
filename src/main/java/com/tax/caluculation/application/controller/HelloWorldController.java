@@ -20,4 +20,11 @@ public class HelloWorldController {
     Message message = new Message("Hello Json");
     return ResponseEntity.ok().body(message);
   }
+
+  @PostMapping("/check-status-code")
+  public ResponseEntity<Message> checkStatusCode(){
+    Message message = new Message("Hello Status code!");
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(message);
+  }
+
 }
