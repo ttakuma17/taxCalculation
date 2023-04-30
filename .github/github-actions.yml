@@ -2,9 +2,11 @@ name: Automated Test
 
 on:
   pull_request:
+    branches:
+      - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
