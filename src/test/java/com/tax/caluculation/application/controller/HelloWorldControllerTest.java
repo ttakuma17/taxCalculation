@@ -26,6 +26,13 @@ class HelloWorldControllerTest {
   public void testHelloPost() throws Exception{
     mockMvc.perform(post("/check-post"))
         .andExpect(status().isOk())
-        .andExpect(content().string("Hello POST"));
+        .andExpect(content().string("{\"message\":\"Hello Json\"}"));
+  }
+
+  @Test
+  public void testStatusCode() throws Exception{
+    mockMvc.perform(post("/check-status-code"))
+        .andExpect(status().isInternalServerError())
+        .andExpect(content().string("{\"message\":\"Hello Status code!\"}"));
   }
 }
