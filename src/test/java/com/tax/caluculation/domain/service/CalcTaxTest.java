@@ -3,8 +3,6 @@ package com.tax.caluculation.domain.service;
 import com.tax.caluculation.domain.resource.RetirementIncomeDeductionDTO;
 import com.tax.caluculation.domain.resource.RetirementIncomeDeductionDTOBuilder;
 import java.util.stream.Stream;
-import net.bytebuddy.asm.Advice.Argument;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
