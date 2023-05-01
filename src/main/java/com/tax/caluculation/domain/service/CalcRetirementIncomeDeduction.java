@@ -3,6 +3,9 @@ package com.tax.caluculation.domain.service;
 import org.springframework.stereotype.Service;
 import com.tax.caluculation.domain.resource.RetirementIncomeDeductionDTO;
 
+/**
+ * 退職所得控除額 を計算するクラス
+ */
 @Service
 public class CalcRetirementIncomeDeduction {
 
