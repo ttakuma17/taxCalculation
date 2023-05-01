@@ -1,6 +1,11 @@
 package com.tax.caluculation.domain.resource;
 
 public class RetirementIncomeDeductionDTO {
+
+  /**
+   * yearsOfService 勤続年数
+   * isDisability 障害者となったことに起因して退職したか
+   */
   private int yearsOfService;
   private boolean isDisability;
 

@@ -11,11 +11,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@WebMvcTest(CalcTax.class)
-class CalcTaxTest {
+@WebMvcTest(CalcRetirementIncomeDeduction.class)
+class CalcRetirementIncomeDeductionTest {
 
   @Autowired
-  private CalcTax calcTax;
+  private CalcRetirementIncomeDeduction calcRetirementIncomeDeduction;
 
   @ParameterizedTest
   @MethodSource("provideArguments")
@@ -24,7 +24,7 @@ class CalcTaxTest {
     RetirementIncomeDeductionDTO dto = new RetirementIncomeDeductionDTOBuilder()
         .years(years).isDisability(isDisability).build();
 
-    int deduction = calcTax.calcRetirementIncomeDeduction(dto);
+    int deduction = calcRetirementIncomeDeduction.calcRetirementIncomeDeduction(dto);
     assertThat(deduction).isEqualTo(expected);
   }
 

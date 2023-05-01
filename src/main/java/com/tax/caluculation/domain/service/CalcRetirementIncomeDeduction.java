@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import com.tax.caluculation.domain.resource.RetirementIncomeDeductionDTO;
 
 @Service
-public class CalcTax {
+public class CalcRetirementIncomeDeduction {
 
   public int calcRetirementIncomeDeduction(RetirementIncomeDeductionDTO retirementIncomeDeductionInput){
     int deduction = getDeduction(retirementIncomeDeductionInput);
