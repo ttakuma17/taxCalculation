@@ -6,20 +6,29 @@ import com.tax.caluculation.domain.resource.RetirementIncomeDeductionDTO;
 @Service
 public class CalcTax {
 
-  public int calcRetirementIncomeDeduction(RetirementIncomeDeductionDTO input){
-    int result = 0;
+  public int calcRetirementIncomeDeduction(RetirementIncomeDeductionDTO retirementIncomeDeductionInput){
+    int deduction = getDeduction(retirementIncomeDeductionInput);
+    deduction = addDeductionForDisability(retirementIncomeDeductionInput, deduction);
+    return deduction;
+  }
 
-    if(input.getYearsOfService() == 1){
-      result = 800000;
-    }else if (input.getYearsOfService() <= 19){
-      result = 400000 * input.getYearsOfService();
+  private  int addDeductionForDisability(RetirementIncomeDeductionDTO retirementIncomeDeductionInput,
+      int deduction) {
+    if(retirementIncomeDeductionInput.getIsDisability()){
+      deduction += 1000000;
+    }
+    return deduction;
+  }
+
+  private int getDeduction(RetirementIncomeDeductionDTO retirementIncomeDeductionInput) {
+    int deduction;
+    if(retirementIncomeDeductionInput.getYearsOfService() == 1){
+      deduction = 800000;
+    }else if (retirementIncomeDeductionInput.getYearsOfService() <= 19){
+      deduction = 400000 * retirementIncomeDeductionInput.getYearsOfService();
     }else {
-      result = 8000000 + 700000 * (input.getYearsOfService() - 20);
+      deduction = 8000000 + 700000 * (retirementIncomeDeductionInput.getYearsOfService() - 20);
     }
-
-    if(input.getIsDisability()){
-      result += 1000000;
-    }
-    return result;
+    return deduction;
   }
 }
