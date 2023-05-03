@@ -27,38 +27,52 @@ import org.springframework.stereotype.Service;
 public class CalcTaxationRetirementIncomeAmount {
 
   public int calcTaxationRetirementIncomeAmount(TaxationRetirementIncomeAmountDTO input) {
-    int amount = 0;
-
     // 控除額の方が大きい時課税金額は 0になる
-    if(isExcessDeduction(input))  return amount;
+    if(isExcessDeduction(input))  return 0;
 
+    int amount;
+    
     if(input.getIsExecutive()){
-
-      if(input.getYears() <= 5){
-        amount =
-            (input.getRetirementBenefit() - input.getRetirementIncomeDeduction());
-      } else {
-        amount =
-            (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
-      }
-
+      amount = getExecutiveAmount(input);
     } else {
-
-      if(input.getYears() <= 5){
-        if((input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) >= 3000000){
-          amount =  (input.getRetirementBenefit() - input.getRetirementIncomeDeduction() - 3000000) + (3000000 / 2);
-        }else {
-          amount =
-              (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
-        }
-      } else {
-        amount =
-            (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
-      }
+      amount = getEmployeeAmount(input);
     }
 
+    return getAdjustedAmount(amount);
+//    return amount;
+  }
+
+  private static int getAdjustedAmount(int amount) {
     if (amount >= 1000) {
       amount = amount / 1000 * 1000;
+    }
+    return amount;
+  }
+
+  private int getEmployeeAmount(TaxationRetirementIncomeAmountDTO input) {
+    int amount;
+    if(input.getYears() <= 5){
+      if((input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) >= 3000000){
+        amount =  (input.getRetirementBenefit() - input.getRetirementIncomeDeduction() - 3000000) + (3000000 / 2);
+      }else {
+        amount =
+            (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
+      }
+    } else {
+      amount =
+          (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
+    }
+    return amount;
+  }
+
+  private int getExecutiveAmount(TaxationRetirementIncomeAmountDTO input) {
+    int amount;
+    if(input.getYears() <= 5){
+      amount =
+          (input.getRetirementBenefit() - input.getRetirementIncomeDeduction());
+    } else {
+      amount =
+          (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
     }
     return amount;
   }
