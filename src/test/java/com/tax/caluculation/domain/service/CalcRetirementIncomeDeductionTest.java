@@ -19,7 +19,7 @@ class CalcRetirementIncomeDeductionTest {
 
   @ParameterizedTest
   @MethodSource("provideArguments")
-  public void testCalcRetirementIncomeDeduction(int years, boolean isDisability , int expected){
+  public void testCalcRetirementIncomeDeduction(int years, boolean isDisability, int expected){
 
     RetirementIncomeDeductionDTO dto = new RetirementIncomeDeductionDTOBuilder()
         .years(years).isDisability(isDisability).build();
