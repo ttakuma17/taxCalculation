@@ -27,54 +27,52 @@ import org.springframework.stereotype.Service;
 public class CalcTaxationRetirementIncomeAmount {
 
   public int calcTaxationRetirementIncomeAmount(TaxationRetirementIncomeAmountDTO input) {
-    // 控除額の方が大きい時課税金額は 0になる
+    /**
+     *  控除額が退職所得より大きければ 課税退職所得は0になる
+     */
     if(isExcessDeduction(input))  return 0;
 
-    int amount;
-    
-    if(input.getIsExecutive()){
-      amount = getExecutiveAmount(input);
-    } else {
-      amount = getEmployeeAmount(input);
-    }
-
-    return getAdjustedAmount(amount);
-//    return amount;
+    /**
+     * 役員か否かで退職所得金額の計算は異なる
+     */
+    if(input.getIsExecutive()) return getAdjustedAmount(getExecutiveAmount(input));
+    else return getAdjustedAmount(getEmployeeAmount(input));
   }
 
-  private static int getAdjustedAmount(int amount) {
-    if (amount >= 1000) {
-      amount = amount / 1000 * 1000;
-    }
-    return amount;
+  /**
+   * 1000円以下の端数の切り捨てを行う関数
+   * @param amount
+   * @return 1000円以下切り捨て後のamount
+   */
+  private int getAdjustedAmount(int amount) {
+    if (amount >= 1000) return amount / 1000 * 1000;
+    else return amount;
   }
 
   private int getEmployeeAmount(TaxationRetirementIncomeAmountDTO input) {
-    int amount;
-    if(input.getYears() <= 5){
-      if((input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) >= 3000000){
-        amount =  (input.getRetirementBenefit() - input.getRetirementIncomeDeduction() - 3000000) + (3000000 / 2);
-      }else {
-        amount =
-            (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
-      }
-    } else {
-      amount =
-          (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
+    int amount = input.getRetirementBenefit() - input.getRetirementIncomeDeduction();
+
+    if(input.getYears() > 5) return amount / 2;
+    else return calcEmployeeRetirementAmount(amount);
+
     }
-    return amount;
+
+  /**
+   * 従業員の課税退職所得金額の計算関数
+   * 勤続年数が5年以下の役員以外の社員に対して使用する
+   * @param amount 退職金 - 控除額
+   * @return 課税退職所得金額
+   */
+  private int calcEmployeeRetirementAmount(int amount) {
+    if(amount >= 3000000) return amount - 3000000 + (3000000 / 2);
+    else return amount / 2;
   }
 
   private int getExecutiveAmount(TaxationRetirementIncomeAmountDTO input) {
-    int amount;
-    if(input.getYears() <= 5){
-      amount =
-          (input.getRetirementBenefit() - input.getRetirementIncomeDeduction());
-    } else {
-      amount =
-          (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
-    }
-    return amount;
+    int amount = input.getRetirementBenefit() - input.getRetirementIncomeDeduction();
+
+    if(input.getYears() <= 5) return amount;
+    else return amount /2;
   }
 
   private boolean isExcessDeduction(TaxationRetirementIncomeAmountDTO input) {
