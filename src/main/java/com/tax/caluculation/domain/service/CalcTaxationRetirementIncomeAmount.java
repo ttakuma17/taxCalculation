@@ -26,34 +26,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class CalcTaxationRetirementIncomeAmount {
 
-  public int calcTaxationRetirementIncomeAmount(TaxationRetirementIncomeAmountDTO taxationRetirementIncomeAmountInput) {
+  public int calcTaxationRetirementIncomeAmount(TaxationRetirementIncomeAmountDTO input) {
     int amount = 0;
 
     // 控除額の方が大きい時課税金額は 0になる
-    if(taxationRetirementIncomeAmountInput.getRetirementBenefit() - taxationRetirementIncomeAmountInput.getRetirementIncomeDeduction() <= 0)  return amount;
+    if(isExcessDeduction(input))  return amount;
 
-    if(taxationRetirementIncomeAmountInput.getIsExecutive()){
+    if(input.getIsExecutive()){
 
-      if(taxationRetirementIncomeAmountInput.getYears() <= 5){
+      if(input.getYears() <= 5){
         amount =
-            (taxationRetirementIncomeAmountInput.getRetirementBenefit() - taxationRetirementIncomeAmountInput.getRetirementIncomeDeduction());
+            (input.getRetirementBenefit() - input.getRetirementIncomeDeduction());
       } else {
         amount =
-            (taxationRetirementIncomeAmountInput.getRetirementBenefit() - taxationRetirementIncomeAmountInput.getRetirementIncomeDeduction()) / 2;
+            (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
       }
 
     } else {
 
-      if(taxationRetirementIncomeAmountInput.getYears() <= 5){
-        if((taxationRetirementIncomeAmountInput.getRetirementBenefit() - taxationRetirementIncomeAmountInput.getRetirementIncomeDeduction()) >= 3000000){
-          amount =  (taxationRetirementIncomeAmountInput.getRetirementBenefit() - taxationRetirementIncomeAmountInput.getRetirementIncomeDeduction() - 3000000) + (3000000 / 2);
+      if(input.getYears() <= 5){
+        if((input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) >= 3000000){
+          amount =  (input.getRetirementBenefit() - input.getRetirementIncomeDeduction() - 3000000) + (3000000 / 2);
         }else {
           amount =
-              (taxationRetirementIncomeAmountInput.getRetirementBenefit() - taxationRetirementIncomeAmountInput.getRetirementIncomeDeduction()) / 2;
+              (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
         }
       } else {
         amount =
-            (taxationRetirementIncomeAmountInput.getRetirementBenefit() - taxationRetirementIncomeAmountInput.getRetirementIncomeDeduction()) / 2;
+            (input.getRetirementBenefit() - input.getRetirementIncomeDeduction()) / 2;
       }
     }
 
@@ -61,5 +61,9 @@ public class CalcTaxationRetirementIncomeAmount {
       amount = amount / 1000 * 1000;
     }
     return amount;
+  }
+
+  private boolean isExcessDeduction(TaxationRetirementIncomeAmountDTO input) {
+    return input.getRetirementBenefit() - input.getRetirementIncomeDeduction() <= 0;
   }
 }
