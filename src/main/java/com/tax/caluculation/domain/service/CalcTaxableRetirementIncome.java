@@ -1,6 +1,6 @@
 package com.tax.caluculation.domain.service;
 
-import com.tax.caluculation.domain.resource.TaxationRetirementIncomeAmountDTO;
+import com.tax.caluculation.domain.resource.TaxableRetirementIncomeDTO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CalcTaxableRetirementIncome {
 
-  public int calcTaxationRetirementIncomeAmount(TaxationRetirementIncomeAmountDTO input) {
+  public int doCalculation(TaxableRetirementIncomeDTO input) {
     /**
      *  控除額が退職所得より大きければ 課税退職所得は0になる
      */
@@ -49,7 +49,7 @@ public class CalcTaxableRetirementIncome {
     else return amount;
   }
 
-  private int getEmployeeAmount(TaxationRetirementIncomeAmountDTO input) {
+  private int getEmployeeAmount(TaxableRetirementIncomeDTO input) {
     int amount = input.getRetirementBenefit() - input.getRetirementIncomeDeduction();
 
     if(input.getYears() > 5) return amount / 2;
@@ -68,14 +68,14 @@ public class CalcTaxableRetirementIncome {
     else return amount / 2;
   }
 
-  private int getExecutiveAmount(TaxationRetirementIncomeAmountDTO input) {
+  private int getExecutiveAmount(TaxableRetirementIncomeDTO input) {
     int amount = input.getRetirementBenefit() - input.getRetirementIncomeDeduction();
 
     if(input.getYears() <= 5) return amount;
     else return amount /2;
   }
 
-  private boolean isExcessDeduction(TaxationRetirementIncomeAmountDTO input) {
+  private boolean isExcessDeduction(TaxableRetirementIncomeDTO input) {
     return input.getRetirementBenefit() - input.getRetirementIncomeDeduction() <= 0;
   }
 }

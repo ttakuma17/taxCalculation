@@ -1,12 +1,12 @@
 package com.tax.caluculation.domain.resource;
 
-public class TaxationRetirementIncomeAmountDTO {
+public class TaxableRetirementIncomeDTO {
   private int years;
   private int retirementBenefit;
   private int retirementIncomeDeduction;
   private boolean isExecutive;
 
-  public TaxationRetirementIncomeAmountDTO(int years, int retirementBenefit, int retirementIncomeDeduction, boolean isExecutive){
+  public TaxableRetirementIncomeDTO(int years, int retirementBenefit, int retirementIncomeDeduction, boolean isExecutive){
     this.years = years;
     this.retirementBenefit = retirementBenefit;
     this.retirementIncomeDeduction = retirementIncomeDeduction;

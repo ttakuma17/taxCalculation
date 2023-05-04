@@ -4,32 +4,31 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.tax.caluculation.domain.resource.IncomeTaxForSeverancePayDTO;
 import com.tax.caluculation.domain.resource.IncomeTaxForSeverancePayDTOBuilder;
-import com.tax.caluculation.domain.resource.RetirementIncomeDeductionDTO;
-import com.tax.caluculation.domain.resource.RetirementIncomeDeductionDTOBuilder;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@WebMvcTest(CalcIncomeTaxForSeverancePay.class)
+@SpringBootTest
 class CalcIncomeTaxForSeverancePayTest {
 
-  @Autowired CalcIncomeTaxForSeverancePay calcIncomeTaxForSeverancePay;
+  @Autowired
+  CalcIncomeTaxForSeverancePay calcIncomeTaxForSeverancePay;
 
   @ParameterizedTest
   @MethodSource("provideArguments")
-  public void testCalcIncomeTaxForSeverancePay(int yearsOfService, boolean isDisability, boolean isOfficer, int severancePay,int expected){
+  public void testCalcIncomeTaxForSeverancePay(int yearsOfService, boolean isDisability, boolean isExecutive, int severancePay,int expected){
     IncomeTaxForSeverancePayDTO dto = new IncomeTaxForSeverancePayDTOBuilder()
         .yearsOfService(yearsOfService)
         .isDisability(isDisability)
-        .isOfficer(isOfficer)
+        .isExecutive(isExecutive)
         .severancePay(severancePay)
         .build();
 
-    int deduction = calcIncomeTaxForSeverancePay.calcIncomeTaxForSeverancePay(dto);
-    assertThat(deduction).isEqualTo(expected);
+    int actual = calcIncomeTaxForSeverancePay.doCalculation(dto);
+    assertThat(actual).isEqualTo(expected);
 
   }
 
@@ -45,5 +44,4 @@ class CalcIncomeTaxForSeverancePayTest {
         Arguments.of(10,true,true, 8000000, 76575)
     ) ;
   }
-
 }

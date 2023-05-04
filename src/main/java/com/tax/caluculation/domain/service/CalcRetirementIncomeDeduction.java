@@ -1,5 +1,6 @@
 package com.tax.caluculation.domain.service;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import com.tax.caluculation.domain.resource.RetirementIncomeDeductionDTO;
 
@@ -7,9 +8,10 @@ import com.tax.caluculation.domain.resource.RetirementIncomeDeductionDTO;
  * 退職所得控除額 を計算するクラス
  */
 @Service
+@Component
 public class CalcRetirementIncomeDeduction {
 
-  public int calcRetirementIncomeDeduction(RetirementIncomeDeductionDTO retirementIncomeDeductionInput){
+  public int doCalculation(RetirementIncomeDeductionDTO retirementIncomeDeductionInput){
     int deduction = getDeduction(retirementIncomeDeductionInput);
     deduction = addDeductionForDisability(retirementIncomeDeductionInput, deduction);
     return deduction;

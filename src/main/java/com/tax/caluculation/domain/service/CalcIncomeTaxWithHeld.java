@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CalcIncomeTaxWithHeld {
 
-  public int calcIncomeTaxWithholdingTaxAmount(int amount) {
+  public int doCalculation(int amount) {
     double result = amount * 1.021;
     return getAdjustedTaxAmount(result);
   }

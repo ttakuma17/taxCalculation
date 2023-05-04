@@ -3,7 +3,7 @@ package com.tax.caluculation.domain.resource;
 public class IncomeTaxForSeverancePayDTOBuilder {
   private int yearsOfService;
   private boolean isDisability;
-  private boolean isOfficer;
+  private boolean isExecutive;
   private int severancePay;
 
   public IncomeTaxForSeverancePayDTOBuilder yearsOfService(int yearsOfService) {
@@ -16,8 +16,8 @@ public class IncomeTaxForSeverancePayDTOBuilder {
     return this;
   }
 
-  public IncomeTaxForSeverancePayDTOBuilder isOfficer(boolean isOfficer) {
-    this.isOfficer = isOfficer;
+  public IncomeTaxForSeverancePayDTOBuilder isExecutive(boolean isOfficer) {
+    this.isExecutive = isOfficer;
     return this;
   }
 
@@ -27,6 +27,6 @@ public class IncomeTaxForSeverancePayDTOBuilder {
   }
 
   public IncomeTaxForSeverancePayDTO build() {
-    return new IncomeTaxForSeverancePayDTO(yearsOfService, isDisability, isOfficer,severancePay);
+    return new IncomeTaxForSeverancePayDTO(yearsOfService, isDisability, isExecutive,severancePay);
   }
 }

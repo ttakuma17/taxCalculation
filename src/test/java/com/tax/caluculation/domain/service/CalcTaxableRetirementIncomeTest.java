@@ -2,7 +2,7 @@ package com.tax.caluculation.domain.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.tax.caluculation.domain.resource.TaxationRetirementIncomeAmountDTO;
+import com.tax.caluculation.domain.resource.TaxableRetirementIncomeDTO;
 import com.tax.caluculation.domain.resource.RetirementIncomeAmountDTOBuilder;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,14 +20,14 @@ class CalcTaxableRetirementIncomeTest {
   @ParameterizedTest
   @MethodSource("provideArguments")
   public void testCalcTaxationRetirementIncomeAmount(int years, int retirementBenefit, int retirementIncomeDeduction ,boolean isExecutive,int expected){
-    TaxationRetirementIncomeAmountDTO dto = new RetirementIncomeAmountDTOBuilder()
+    TaxableRetirementIncomeDTO dto = new RetirementIncomeAmountDTOBuilder()
         .years(years)
         .retirementBenefit(retirementBenefit)
         .retirementIncomeDeduction(retirementIncomeDeduction)
         .isExecutive(isExecutive)
         .build();
 
-    int amount = calcTaxableRetirementIncome.calcTaxationRetirementIncomeAmount(dto);
+    int amount = calcTaxableRetirementIncome.doCalculation(dto);
     assertThat(amount).isEqualTo(expected);
   }
 

@@ -19,7 +19,7 @@ class CalcIncomeTaxWithHeldTest {
       "1000 ,1021"
   })
   public void testCalcIncomeTaxWithholdingTaxAmount(int amount , int expected){
-    int actual = calcIncomeTaxWithHeld.calcIncomeTaxWithholdingTaxAmount(amount);
+    int actual = calcIncomeTaxWithHeld.doCalculation(amount);
     assertThat(actual).isEqualTo(expected);
   }
 }

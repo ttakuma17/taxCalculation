@@ -3,13 +3,13 @@ package com.tax.caluculation.domain.resource;
 public class IncomeTaxForSeverancePayDTO {
   private int yearsOfService;
   private boolean isDisability;
-  private boolean isOfficer;
+  private boolean isExecutive;
   private int severancePay;
 
-  public IncomeTaxForSeverancePayDTO(int yearsOfService, boolean isDisability, boolean isOfficer, int severancePay){
+  public IncomeTaxForSeverancePayDTO(int yearsOfService, boolean isDisability, boolean isExecutive, int severancePay){
     this.yearsOfService = yearsOfService;
     this.isDisability = isDisability;
-    this.isOfficer = isOfficer;
+    this.isExecutive = isExecutive;
     this.severancePay = severancePay;
   }
 
@@ -31,11 +31,11 @@ public class IncomeTaxForSeverancePayDTO {
   }
 
   public boolean getIsOfficer(){
-    return this.isOfficer;
+    return this.isExecutive;
   }
 
   public void setIsOfficer(boolean isOfficer){
-    this.isOfficer = isOfficer;
+    this.isExecutive = isOfficer;
   }
 
   public int getSeverancePay(){

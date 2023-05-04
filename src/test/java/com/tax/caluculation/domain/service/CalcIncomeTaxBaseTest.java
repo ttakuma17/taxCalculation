@@ -31,7 +31,7 @@ class CalcIncomeTaxBaseTest {
       "40000000,13204000"
   })
   public void testCalcBaseIncomeTaxAmount(int taxationRetirementIncomeAmount, int expected){
-    int amount = calcIncomeTaxBase.CalcBaseIncomeTaxAmount(taxationRetirementIncomeAmount);
+    int amount = calcIncomeTaxBase.doCalculation(taxationRetirementIncomeAmount);
     assertThat(amount).isEqualTo(expected);
   }
 }

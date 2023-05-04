@@ -16,7 +16,7 @@ public class CalcIncomeTaxBase {
    * @param amount 課税退職所得金額
    * @return 基準所得税額
    */
-  public int CalcBaseIncomeTaxAmount(int amount) {
+  public int doCalculation(int amount) {
     return (int) (amount * getTaxRate(amount) - getDeduction(amount));
   }
 

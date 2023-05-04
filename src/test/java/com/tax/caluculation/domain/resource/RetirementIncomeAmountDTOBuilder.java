@@ -32,8 +32,8 @@ public class RetirementIncomeAmountDTOBuilder {
     return this;
   }
 
-  public TaxationRetirementIncomeAmountDTO build() {
-    return new TaxationRetirementIncomeAmountDTO(years, retirementBenefit, retirementIncomeDeduction,isExecutive);
+  public TaxableRetirementIncomeDTO build() {
+    return new TaxableRetirementIncomeDTO(years, retirementBenefit, retirementIncomeDeduction,isExecutive);
   }
 
 }

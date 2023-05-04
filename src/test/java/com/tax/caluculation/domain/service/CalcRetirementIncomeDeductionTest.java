@@ -24,7 +24,7 @@ class CalcRetirementIncomeDeductionTest {
     RetirementIncomeDeductionDTO dto = new RetirementIncomeDeductionDTOBuilder()
         .years(years).isDisability(isDisability).build();
 
-    int deduction = calcRetirementIncomeDeduction.calcRetirementIncomeDeduction(dto);
+    int deduction = calcRetirementIncomeDeduction.doCalculation(dto);
     assertThat(deduction).isEqualTo(expected);
   }
 
