@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
  * 基準所得税額を計算するクラス
  *
  * 仕様
- *
- * 課税所得金額 / 税率 から 控除額 が決まる
+ * 基準所得税額 = 課税所得金額 * 税率 - 控除額 で算出される
  *
  */
 @Service
