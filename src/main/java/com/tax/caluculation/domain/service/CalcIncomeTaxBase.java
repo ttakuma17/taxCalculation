@@ -1,6 +1,5 @@
 package com.tax.caluculation.domain.service;
 
-import com.tax.caluculation.domain.resource.BaseIncomeTaxAmountDTO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class CalcBaseIncomeTaxAmount {
+public class CalcIncomeTaxBase {
   /**
    *
    * @param amount 課税退職所得金額

@@ -11,11 +11,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
-@WebMvcTest(CalcTaxationRetirementIncomeAmount.class)
-class CalcTaxationRetirementIncomeAmountTest {
+@WebMvcTest(CalcTaxableRetirementIncome.class)
+class CalcTaxableRetirementIncomeTest {
 
   @Autowired
-  private CalcTaxationRetirementIncomeAmount calcTaxationRetirementIncomeAmount;
+  private CalcTaxableRetirementIncome calcTaxableRetirementIncome;
 
   @ParameterizedTest
   @MethodSource("provideArguments")
@@ -27,7 +27,7 @@ class CalcTaxationRetirementIncomeAmountTest {
         .isExecutive(isExecutive)
         .build();
 
-    int amount = calcTaxationRetirementIncomeAmount.calcTaxationRetirementIncomeAmount(dto);
+    int amount = calcTaxableRetirementIncome.calcTaxationRetirementIncomeAmount(dto);
     assertThat(amount).isEqualTo(expected);
   }
 

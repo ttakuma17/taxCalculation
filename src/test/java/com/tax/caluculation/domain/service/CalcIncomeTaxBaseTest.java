@@ -6,10 +6,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
-@WebMvcTest(CalcBaseIncomeTaxAmount.class)
-class CalcBaseIncomeTaxAmountTest {
+@WebMvcTest(CalcIncomeTaxBase.class)
+class CalcIncomeTaxBaseTest {
 
-  @Autowired CalcBaseIncomeTaxAmount calcBaseIncomeTaxAmount;
+  @Autowired
+  CalcIncomeTaxBase calcIncomeTaxBase;
 
   @ParameterizedTest
   @CsvSource({
@@ -30,7 +31,7 @@ class CalcBaseIncomeTaxAmountTest {
       "40000000,13204000"
   })
   public void testCalcBaseIncomeTaxAmount(int taxationRetirementIncomeAmount, int expected){
-    int amount = calcBaseIncomeTaxAmount.CalcBaseIncomeTaxAmount(taxationRetirementIncomeAmount);
+    int amount = calcIncomeTaxBase.CalcBaseIncomeTaxAmount(taxationRetirementIncomeAmount);
     assertThat(amount).isEqualTo(expected);
   }
 }

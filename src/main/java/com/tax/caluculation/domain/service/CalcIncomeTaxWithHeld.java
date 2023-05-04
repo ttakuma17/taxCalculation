@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * 求めた税額に1円未満の端数があるときは切り捨てる
  */
 @Service
-public class CalcIncomeTaxWithholdingTaxAmount {
+public class CalcIncomeTaxWithHeld {
 
   public int calcIncomeTaxWithholdingTaxAmount(int amount) {
     double result = amount * 1.021;
