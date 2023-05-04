@@ -5,8 +5,10 @@ import com.tax.caluculation.domain.resource.RetirementIncomeDeductionDTO;
 import com.tax.caluculation.domain.resource.TaxableRetirementIncomeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Service
+@Validated
 public class CalcIncomeTaxForSeverancePay {
   @Autowired
   CalcRetirementIncomeDeduction calcRetirementIncomeDeduction;
