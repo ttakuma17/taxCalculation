@@ -19,7 +19,7 @@ public class CalcIncomeTaxForSeverancePay {
   @Autowired
   CalcIncomeTaxWithHeld calcIncomeTaxWithHeld;
 
-  public int doCalculation(IncomeTaxForSeverancePayDTO dto) {
+  public int doCalculation(@Validated IncomeTaxForSeverancePayDTO dto) {
 
     RetirementIncomeDeductionDTO a = new RetirementIncomeDeductionDTO(dto.getYearsOfService(), dto.getIsDisability());
     int retirementIncomeDeduction = calcRetirementIncomeDeduction.doCalculation(

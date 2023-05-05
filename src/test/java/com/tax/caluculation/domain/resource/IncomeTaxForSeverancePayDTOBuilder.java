@@ -16,8 +16,8 @@ public class IncomeTaxForSeverancePayDTOBuilder {
     return this;
   }
 
-  public IncomeTaxForSeverancePayDTOBuilder isExecutive(boolean isOfficer) {
-    this.isExecutive = isOfficer;
+  public IncomeTaxForSeverancePayDTOBuilder isExecutive(boolean isExecutive) {
+    this.isExecutive = isExecutive;
     return this;
   }
 

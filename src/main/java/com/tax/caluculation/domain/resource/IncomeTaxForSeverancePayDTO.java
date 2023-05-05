@@ -5,15 +5,15 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 public class IncomeTaxForSeverancePayDTO {
-  @NotBlank
+  @NotBlank(message = "勤続年数は必須です1〜100の間の数値を指定してください")
   @Min(1)
   @Max(100)
   private int yearsOfService;
-  @NotBlank
+  @NotBlank(message = "障害による退職かどうか必須項目です。trueかfalseを指定してください")
   private boolean isDisability;
-  @NotBlank
+  @NotBlank(message = "役員等かどうか必須項目です。trueかfalseを指定してください")
   private boolean isExecutive;
-  @NotBlank
+  @NotBlank(message = "退職金の金額は1円以上1,000,000,000円以下のみ指定可能です")
   @Min(1)
   @Max(1_000_000_000)
   private int severancePay;
