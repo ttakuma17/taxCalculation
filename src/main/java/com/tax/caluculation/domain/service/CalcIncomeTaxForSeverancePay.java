@@ -3,6 +3,7 @@ package com.tax.caluculation.domain.service;
 import com.tax.caluculation.domain.resource.IncomeTaxForSeverancePayDTO;
 import com.tax.caluculation.domain.resource.RetirementIncomeDeductionDTO;
 import com.tax.caluculation.domain.resource.TaxableRetirementIncomeDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -19,9 +20,8 @@ public class CalcIncomeTaxForSeverancePay {
   @Autowired
   CalcIncomeTaxWithHeld calcIncomeTaxWithHeld;
 
-  public int doCalculation(@Validated IncomeTaxForSeverancePayDTO dto) {
+  public int doCalculation(IncomeTaxForSeverancePayDTO dto) {
 
-    RetirementIncomeDeductionDTO a = new RetirementIncomeDeductionDTO(dto.getYearsOfService(), dto.getIsDisability());
     int retirementIncomeDeduction = calcRetirementIncomeDeduction.doCalculation(
         new RetirementIncomeDeductionDTO(dto.getYearsOfService(), dto.getIsDisability())
     );
