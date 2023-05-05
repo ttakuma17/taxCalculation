@@ -4,6 +4,7 @@ import com.tax.caluculation.domain.resource.IncomeTaxForSeverancePayDTO;
 import com.tax.caluculation.domain.resource.Tax;
 import com.tax.caluculation.domain.service.CalcIncomeTaxForSeverancePay;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,6 @@ public class CalcTax {
   @PostMapping("/calc-tax")
   public Tax incomeTax(@RequestBody IncomeTaxForSeverancePayDTO req){
     int incomeTax = calcIncomeTaxForSeverancePay.doCalculation(req);
-    Tax tax = new Tax(incomeTax);
-    return tax;
+    return new Tax(incomeTax);
   }
 }
