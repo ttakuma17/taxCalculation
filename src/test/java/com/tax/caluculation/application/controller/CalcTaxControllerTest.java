@@ -4,6 +4,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.tax.caluculation.domain.service.CalcIncomeTaxForSeverancePay;
+import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -13,8 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@WebMvcTest(CalcTax.class)
-class CalcTaxTest {
+@WebMvcTest(CalcTaxController.class)
+class CalcTaxControllerTest {
   @Autowired
   MockMvc mockMvc;
 
@@ -38,5 +39,21 @@ class CalcTaxTest {
         )
         .andExpect(MockMvcResultMatchers.status().isOk())
         .andExpect(MockMvcResultMatchers.content().json("{\"tax\":25524}"));
+  }
+
+  @Test
+  void testBadRequestWithValidation() throws Exception{
+    mockMvc.perform(MockMvcRequestBuilders.post("/calc-tax")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("""
+                {
+                  "yearsOfService": 0,
+                  "isDisability": "",
+                  "isOfficer": "",
+                  "severancePay": 0
+                }
+                """)
+        )
+        .andExpect(MockMvcResultMatchers.status().isBadRequest());
   }
 }

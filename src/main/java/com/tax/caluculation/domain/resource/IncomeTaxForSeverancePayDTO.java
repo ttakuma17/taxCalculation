@@ -12,10 +12,10 @@ public class IncomeTaxForSeverancePayDTO {
   @Max(value = 100, message ="勤続年数は1年以上100年以下のみ指定可能です")
   private int yearsOfService;
   @NotNull(message = "障害による退職かどうか必須項目です。")
-  @Pattern(regexp = "^(true|false)$", message = "isDisability は true か falseを指定してください")
+//  @Pattern(regexp = "^(true|false)$", message = "isDisability は true か falseを指定してください")
   private boolean isDisability;
   @NotNull(message = "役員等かどうか必須項目です。")
-  @Pattern(regexp = "^(true|false)$", message = "isOfficer は true か falseを指定してください")
+//  @Pattern(regexp = "^(true|false)$", message = "isOfficer は true か falseを指定してください")
   private boolean isExecutive;
   @NotNull(message = "退職金は必須項目です。")
   @Min(value = 1, message = "退職金の金額は1円以上1,000,000,000円以下のみ指定可能です")

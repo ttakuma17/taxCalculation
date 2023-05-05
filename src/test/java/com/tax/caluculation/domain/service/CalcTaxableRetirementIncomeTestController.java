@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
 @WebMvcTest(CalcTaxableRetirementIncome.class)
-class CalcTaxableRetirementIncomeTest {
+class CalcTaxableRetirementIncomeTestController {
 
   @Autowired
   private CalcTaxableRetirementIncome calcTaxableRetirementIncome;
